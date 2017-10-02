@@ -1,51 +1,82 @@
 //your code here
-NormalParticle bob = new NormalParticle();
+//type would be NormalParticle --> Particle
+Particle[] bob;
 
 void setup()
 {
 	size(500, 500);
+	bob = new NormalParticle[3000];
+	for (int i = 0; i < bob.length; i++)
+	{
+		bob[i] = new NormalParticle();
+	}
+	bob[1] = new OddballParticle();
 }
 void draw()
 {
-	bob.move();
-	bob.show();
-	//your code here
+	background(0);
+	for (int i = 0; i < bob.length; i++)
+	{
+		bob[i].show();
+		bob[i].move();
+	}
+
 }
 class NormalParticle
 {
-	double myX, myY, speed, angle;
-	int Color;
+	double myX, myY, mySpeed, myDirection;
+	int myColor;
 
 	NormalParticle() 
 	{
-		myX = (int)(Math.random()*300);
-		myY = (int)(Math.random()*300);
-		speed = Math.random()*10;
-		angle = MATH.PI*2*Math.random();
-		// x = y = 250;
-		// speed = 20; 
-		Color = (int)(Math.random()*256);
-		// angle = Math.random()*361;
+		
+		myX = 250;
+		myY = 250;
+		mySpeed = Math.random()*10;
+		myDirection = Math.PI*2*Math.random();
+		myColor = (int)(Math.random()*256);
 	}
 
-	void move() 
+	public void move() 
 	{
-		x = x + cos(angle*speed);
-		y = y + sin(angle*speed); 
+		myX = myX + cos((float)(myDirection*mySpeed));
+		myY = myY + sin((float)(myDirection*mySpeed)); 
 	}
 
-	void show()
+	public void show()
 	{
-		fill(Color);
-		ellipse(x, y, 10 , 10);
+		fill(myColor);
+		noStroke();
+		ellipse((float)myX, (float)myY, 10 , 10);
 	}
 }
-interface Particle
+
+
+interface Particle //helps group two different types into same group
 {
 	//your code here
+	public void show();
+	public void move();
 }
 class OddballParticle //uses an interface
 {
+	int myX, myY;
+	OddballParticle()
+	{
+		myX = 250;
+		myY = 50;
+	}
+
+	public void show() 
+	{
+		rect(myX, myY, 50, 50);
+	}
+
+	public void move()
+	{
+		myX = myX + cos((float)(myDirection*mySpeed));
+		myY = myY + sin((float)(myDirection*mySpeed)); 
+	}
 	//your code here
 }
 class JumboParticle //uses inheritance
