@@ -5,12 +5,13 @@ Particle[] bob;
 void setup()
 {
 	size(500, 500);
-	bob = new NormalParticle[3000];
+	bob = new NormalParticle[300];
 	for (int i = 0; i < bob.length; i++)
 	{
 		bob[i] = new NormalParticle();
 	}
 	bob[1] = new OddballParticle();
+	//bob[2] = new JumboParticle();
 }
 void draw()
 {
@@ -22,7 +23,7 @@ void draw()
 	}
 
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
 	double myX, myY, mySpeed, myDirection;
 	int myColor;
@@ -39,8 +40,10 @@ class NormalParticle
 
 	public void move() 
 	{
-		myX = myX + cos((float)(myDirection*mySpeed));
-		myY = myY + sin((float)(myDirection*mySpeed)); 
+		myX = myX + cos((float)(myDirection)*(float)mySpeed);
+		//myX = myX + cos((float)((Math.random()*PI)*mySpeed));
+		myY = myY + sin((float)(myDirection)*(float)mySpeed); 
+		//myY  =  myY + sin((float)((Math.random()*PI)*mySpeed));
 	}
 
 	public void show()
@@ -54,11 +57,10 @@ class NormalParticle
 
 interface Particle //helps group two different types into same group
 {
-	//your code here
 	public void show();
 	public void move();
 }
-class OddballParticle //uses an interface
+class OddballParticle implements Particle //uses an interface
 {
 	int myX, myY;
 	OddballParticle()
@@ -74,13 +76,19 @@ class OddballParticle //uses an interface
 
 	public void move()
 	{
-		myX = myX + cos((float)(myDirection*mySpeed));
-		myY = myY + sin((float)(myDirection*mySpeed)); 
+		myX = myX + (int)(Math.random()*1);
+		myY = myY + (int)(Math.random()*1);//sin((float)(myDirection*mySpeed)); 
 	}
-	//your code here
 }
-class JumboParticle //uses inheritance
+class JumboParticle extends NormalParticle //inherits from normal all veriables and most of functions //uses inheritance
 {
-	//your code here
+	//same as normal but just picture
+	public void show() 
+	{
+		fill(myColor);
+		noStroke();
+		ellipse((float)myX, (float)myY, 10 , 10);
+	}
+
 }
 
