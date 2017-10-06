@@ -18,6 +18,7 @@ void setup()
 }
 void draw()
 {
+	background(0);
 	for (int i = 0; i < bob.length/2; i++)
 	{
 		bob[i].show();
@@ -42,7 +43,6 @@ class NormalParticle implements Particle
 		myY = mouseY;
 		mySpeed = Math.random()*10;
 		myDirection = Math.PI*2*Math.random();
-		myColor = (int)(Math.random()*256);
 	}
 
 	public void move() 
@@ -55,9 +55,12 @@ class NormalParticle implements Particle
 
 	public void show()
 	{
+		int fade = 156;
+		myColor = color ((int)(Math.random()*255)+20, (int)(Math.random()*255)+30, (int)(Math.random()*255)+70, fade);
+		fade += 5;
 		fill(myColor);
 		noStroke();
-		ellipse((float)myX, (float)myY, 10 , 10);
+		ellipse((float)myX, (float)myY, 5 , 5);
 	}
 }
 
@@ -81,13 +84,13 @@ class OddballParticle implements Particle //uses an interface
 
 	public void show() 
 	{
-		rect(myX, myY, 50, 50);
+		rect(myX, myY, 20, 20);
 	}
 
 	public void move()
 	{
-		myX = myX + (int)(Math.random()*20);
-		myY = myY + (int)(Math.random()*20);//sin((float)(myDirection*mySpeed)); 
+		myX = myX + (int)(Math.random()*2);
+		myY = myY + (int)(Math.random()*2);//sin((float)(myDirection*mySpeed)); 
 	}
 }
 
