@@ -10,9 +10,6 @@ void setup()
 	for (int i = 0; i < bob.length; i++)
 	{
 		bob[i] = new NormalParticle();
-		//bob[1] = new OddballParticle();
-		//bob[2] = new JumboParticle();
-		//difference between putting it here vs out? 
 	}
 	bob[1] = new OddballParticle();
 	bob[2] = new JumboParticle();
@@ -24,8 +21,8 @@ void draw()
 	{
 		bob[i].show();
 		bob[i].move();
-		//bob[1].myX = mouseX;
-		//bob[1].myY = mouseY;
+		((JumboParticle)bob[2]).myX = mouseX-10;
+		((JumboParticle)bob[2]).myY = mouseY-10;
 	}
 
 
